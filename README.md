@@ -7,7 +7,7 @@ Recommended to install in a Linux Virtual Machine with linux bash(Ubuntu, for ex
 Copy and paste the line below in your terminal and run it:
 
 ```bash
-curl -O https://raw.githubusercontent.com/fetchoracle/telliot-install-script-alt/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh && cd telliot-feeds-alt && source venv/bin/activate
+curl -O https://raw.githubusercontent.com/fetchoracle/telliot-install-script-alt/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh && cd && cd telliot-feeds-alt && source venv/bin/activate
 ```
 
 Note:
