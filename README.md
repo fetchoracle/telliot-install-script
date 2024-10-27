@@ -6,7 +6,9 @@ This script will clone and install telliot-feeds-alt, telliot-core-alt and, opti
 Recommended to install in a Linux Virtual Machine with linux bash(Ubuntu, for example). 
 Copy and paste the line below in your terminal and run it:
 
-curl -O https://raw.githubusercontent.com/fetchoracle/telliot-install-script-alt/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh && cd telliot-feeds-alt && source venv/bin/activate
+```bash
+curl -O https://raw.githubusercontent.com/fetchoracle/telliot-install-script-alt/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh && cd && cd telliot-feeds-alt && source venv/bin/activate
+```
 
 Note:
 Everytime you need to run Telliot or DVM, you need to enter the venv environment from inside the telliot feeds folder: source/venv/bin/activate
