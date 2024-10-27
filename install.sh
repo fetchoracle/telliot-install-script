@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Check if the directory already exists
-if [ -d "$HOME/telliot-feeds-alt" ]; then
-  echo "The folder 'telliot-feeds-alt' already exists. Please remove or rename it to save old configs."
+if [ -d "$HOME/telliot-feeds" ]; then
+  echo "The folder 'telliot-feeds' already exists. Please remove or rename it to save old configs."
   exit 1
 fi
 
 echo 
-echo " ╔═════════════════════════════════════════════════════════════════════════╗"
-echo " ║ This script will install Python, Telliot-feeds-alt and Telliot-core-alt ║" 
-echo " ║           (Optionally you can also choose to install DVM-alt)           ║"
-echo " ╚═════════════════════════════════════════════════════════════════════════╝"
+echo "       ╔═════════════════════════════════════════════════════════════════╗"
+echo "       ║ This script will install Python, Telliot-feeds and Telliot-core ║" 
+echo "       ║           (Optionally you can also choose to install the DVM)   ║"
+echo "       ╚═════════════════════════════════════════════════════════════════╝"
 echo "If installing in your main machine, please read the install.sh before install!"
 echo
 cd "$HOME/"
@@ -58,8 +58,8 @@ echo "Cloning branch: $branch"
 echo
 
 # Clone the repository with the selected branch
-echo "Cloning telliot-feeds-alt..."
-git clone -b "$branch" https://github.com/fetchoracle/telliot-feeds-alt.git
+echo "Cloning telliot-feeds..."
+git clone -b "$branch" https://github.com/fetchoracle/telliot-feeds.git
 
 if [ $? -eq 0 ]; then
   echo "Telliot-feeds cloned successfully."
@@ -70,7 +70,7 @@ fi
 
 echo
 echo "Moving to telliot-feeds folder..."
-cd "$HOME/telliot-feeds-alt" || { echo "Failed to change directory. Make sure to install it from HOME."; exit 1; }
+cd "$HOME/telliot-feeds" || { echo "Failed to change directory. Make sure to install it from HOME."; exit 1; }
 
 echo
 echo "Installing Python 3.9 and venv..."
@@ -88,8 +88,8 @@ echo "Installing telliot feeds"
 pip install -e .
 
 echo
-echo "Cloning telliot-core-alt..."
-git clone -b "$branch" https://github.com/fetchoracle/telliot-core-alt.git
+echo "Cloning telliot-core..."
+git clone -b "$branch" https://github.com/fetchoracle/telliot-core.git
 
 if [ $? -eq 0 ]; then
   echo "Telliot-core cloned successfully."
@@ -100,19 +100,19 @@ fi
 
 echo
 echo "Moving to telliot-core folder..."
-cd "$HOME/telliot-feeds-alt/telliot-core-alt" || { echo "Failed to change directory."; exit 1; }
+cd "$HOME/telliot-feeds/telliot-core" || { echo "Failed to change directory."; exit 1; }
 
 echo
 echo "Installing telliot core"
 pip install -e .
 telliot config init
 
-cd "$HOME/telliot-feeds-alt/" || { echo "Failed to change directory."; exit 1; }
+cd "$HOME/telliot-feeds/" || { echo "Failed to change directory."; exit 1; }
 
 if [ "$dvm" = "yes" ]; then
   echo
-  echo "Cloning DVM-alt..."
-  git clone -b "$branch" https://github.com/fetchoracle/disputable-values-monitor-alt.git
+  echo "Cloning DVM..."
+  git clone -b "$branch" https://github.com/fetchoracle/disputable-values-monitor.git
 
   if [ $? -eq 0 ]; then
     echo "DVM cloned successfully."
@@ -123,7 +123,7 @@ if [ "$dvm" = "yes" ]; then
 
   echo
   echo "Moving to DVM folder..."
-  cd "$HOME/telliot-feeds-alt/disputable-values-monitor-alt" || { echo "Failed to change directory."; exit 1; }
+  cd "$HOME/telliot-feeds/disputable-values-monitor" || { echo "Failed to change directory."; exit 1; }
 
   echo
   echo "Installing DVM"
