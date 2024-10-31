@@ -12,7 +12,7 @@ echo "      ║ This script will install Python, Telliot-feeds and Telliot-core 
 echo "      ║       (Optionally you can also choose to install the DVM)       ║"
 echo "      ╚═════════════════════════════════════════════════════════════════╝"
 echo "If installing in your main machine, please read the install.sh before install!"
-echo "You may need to give authorization to install Python."
+echo "Note: You may need to give authorization for updates and Python during install."
 echo
 cd "$HOME/"
 echo "Choose the environment to clone and install: "
@@ -60,6 +60,12 @@ echo "Cloning branch: $branch"
 sleep 2
 echo
 branch="${branch/testnet\/main/testnet}"
+
+echo updating system... apt-get, apt and git update.
+sleep 3
+sudo apt update
+sudo apt-get update
+sudo apt install git
 
 # Clone the repository with the selected branch
 echo "Cloning telliot-feeds..."
