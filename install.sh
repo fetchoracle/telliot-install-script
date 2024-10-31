@@ -7,10 +7,10 @@ if [ -d "$HOME/telliot-feeds" ]; then
 fi
 
 echo 
-echo "       ╔═════════════════════════════════════════════════════════════════╗"
-echo "       ║ This script will install Python, Telliot-feeds and Telliot-core ║" 
-echo "       ║           (Optionally you can also choose to install the DVM)   ║"
-echo "       ╚═════════════════════════════════════════════════════════════════╝"
+echo "      ╔═════════════════════════════════════════════════════════════════╗"
+echo "      ║ This script will install Python, Telliot-feeds and Telliot-core ║" 
+echo "      ║       (Optionally you can also choose to install the DVM)       ║"
+echo "      ╚═════════════════════════════════════════════════════════════════╝"
 echo "If installing in your main machine, please read the install.sh before install!"
 echo
 cd "$HOME/"
