@@ -34,6 +34,7 @@ case $environment_choice in
     ;;
 esac
 echo "You entered: $branch"
+sleep 1
 echo
 read -p "Do you want to install DVM (Disputable Values Monitor), too? " install_dvm
 
@@ -56,15 +57,18 @@ case $install_dvm in
 esac
 
 echo "Cloning branch: $branch"
+sleep 2
 echo
 branch="${branch/testnet\/main/testnet}"
 
 # Clone the repository with the selected branch
 echo "Cloning telliot-feeds..."
+sleep 2
 git clone -b "$branch" https://github.com/fetchoracle/telliot-feeds.git
 
 if [ $? -eq 0 ]; then
   echo "Telliot-feeds cloned successfully."
+  sleep 2
 else
   echo "Failed to clone telliot-feeds."
   exit 1
@@ -72,29 +76,47 @@ fi
 
 echo
 echo "Moving to telliot-feeds folder..."
+sleep 2
 cd "$HOME/telliot-feeds" || { echo "Failed to change directory. Make sure to install it from HOME."; exit 1; }
 
 echo
 echo "Installing Python 3.9 and venv..."
+sleep 2
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install -y python3.9 python3.9-venv #python3-pip
 
 # Create and activate the virtual environment
 echo
 echo "Creating and entering virtual environment..."
+sleep 2
 python3.9 -m venv venv
 source venv/bin/activate
 
 echo
 echo "Installing telliot feeds"
+sleep 2
 pip install -e .
+echo
+echo "Creating copy of .env.example"
+sleep 2
+cp .env.example .env
+if [ -f .env ]; then
+    echo ".env created successfully."
+    sleep 2
+else
+    echo "Failed to create .env."
+    echo "Please, check telliot-feeds folder and rename .env.example to .env manually"
+    sleep 3
+fi
 
 echo
 echo "Cloning telliot-core..."
+sleep 2
 git clone -b "$branch" https://github.com/fetchoracle/telliot-core.git
 
 if [ $? -eq 0 ]; then
   echo "Telliot-core cloned successfully."
+  sleep 2
 else
   echo "Failed to clone telliot-core."
   exit 1
@@ -102,10 +124,12 @@ fi
 
 echo
 echo "Moving to telliot-core folder..."
+sleep 2
 cd "$HOME/telliot-feeds/telliot-core" || { echo "Failed to change directory."; exit 1; }
 
 echo
 echo "Installing telliot core"
+sleep 2
 pip install -e .
 telliot config init
 
@@ -114,10 +138,12 @@ cd "$HOME/telliot-feeds/" || { echo "Failed to change directory."; exit 1; }
 if [ "$dvm" = "yes" ]; then
   echo
   echo "Cloning DVM..."
+  sleep 2
   git clone -b "$branch" https://github.com/fetchoracle/disputable-values-monitor.git
 
   if [ $? -eq 0 ]; then
     echo "DVM cloned successfully."
+    sleep 2
   else
     echo "Failed to clone DVM."
     exit 1
@@ -125,19 +151,21 @@ if [ "$dvm" = "yes" ]; then
 
   echo
   echo "Moving to DVM folder..."
+  sleep 2
   cd "$HOME/telliot-feeds/disputable-values-monitor" || { echo "Failed to change directory."; exit 1; }
 
   echo
   echo "Installing DVM"
+  sleep 2
   pip install -e .
 fi  
 
 echo
-echo "╔══════════════════════════════════════════════════════════════════════════╗"
-echo "║Installation complete! Confirm you're inside venv before running anything.║"
+echo "      ╔════════════════════════════════════════════════════════════╗"
+echo -e "      ║                   \e[1mInstallation complete!\e[0m                   ║"
+echo "      ║         Telliot guide: https://tinyurl.com/mryzpw9v        ║"
 if [ "$dvm" = "yes" ]; then
-  echo "║                           To run the DVM:                                ║"
-  echo "║Always run 'source vars.sh' from DVM folder to load the Discord variables ║"
+  echo "      ║           DVM guide: https://tinyurl.com/bdey7ph9          ║"
 fi
-echo "╚══════════════════════════════════════════════════════════════════════════╝"
+echo "      ╚════════════════════════════════════════════════════════════╝"
 exit 0
