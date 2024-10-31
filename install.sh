@@ -12,17 +12,18 @@ echo "      ║ This script will install Python, Telliot-feeds and Telliot-core 
 echo "      ║       (Optionally you can also choose to install the DVM)       ║"
 echo "      ╚═════════════════════════════════════════════════════════════════╝"
 echo "If installing in your main machine, please read the install.sh before install!"
+echo "You may need to give authorization to install Python."
 echo
 cd "$HOME/"
 echo "Choose the environment to clone and install: "
 echo "1 - Testnet/Main (Default)"
 echo "2 - Staging   (QA tests only)"
 echo
-read -p "Enter 1-testnet or 2-staging: " environment_choice
+read -p "Enter 1-testnet/main or 2-staging: " environment_choice
 
 case $environment_choice in
   1)
-    branch="testnet"
+    branch="testnet/main"
     ;;
   2)
     branch="staging"
@@ -56,6 +57,7 @@ esac
 
 echo "Cloning branch: $branch"
 echo
+branch="${branch/testnet\/main/testnet}"
 
 # Clone the repository with the selected branch
 echo "Cloning telliot-feeds..."
