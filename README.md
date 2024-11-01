@@ -11,7 +11,8 @@ curl -O https://raw.githubusercontent.com/fetchoracle/telliot-install-script/ref
 ```
 
 Important Note:
-Everytime you need to run Telliot or DVM, you need to enter the venv environment from inside the 'telliot feeds' folder located in $Home: 
+Everytime you need to run Telliot or DVM, you need to enter the venv environment from inside the 'telliot feeds' folder located in $Home, running: 
 source/venv/bin/activate
 
-To run the DVM, go to DVM folder (inside 'telliot feeds') and run 'source vars.sh' to load Discord variables
+[Telliot instructions](https://tinyurl.com/mryzpw9v)  
+[DVM instructions](https://tinyurl.com/bdey7ph9)
