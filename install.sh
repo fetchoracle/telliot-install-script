@@ -88,6 +88,60 @@ cd "$HOME/telliot-feeds" || { echo "Failed to change directory. Make sure to ins
 echo
 echo "Installing Python 3.9 and venv..."
 sleep 2
+
+current_distro=""
+if command -v lsb_release &> /dev/null; then
+    current_distro=$(lsb_release -d | cut -f2)
+else
+    echo "lsb_release command not found"
+fi
+echo "Current Distro Version: $current_distro"
+
+supported_distros=("Ubuntu" "Debian")
+supported_releases_ubuntu=("24.04" "22.04")
+supported_releases_debian=("11")
+
+current_distro_id=$(lsb_release -i | cut -f2)
+current_distro_release=$(lsb_release -r | cut -f2)
+
+found=false
+for distro in "${supported_distros[@]}"; do
+    if [[ "$current_distro_id" != "$distro" ]]; then
+        continue
+    fi
+
+    if [[ "$distro" == "Ubuntu" ]]; then
+        for release in "${supported_releases_ubuntu[@]}"; do
+            if [[ "$current_distro_release" == "$release" ]]; then
+                found=true
+                break
+            fi
+        done
+    fi
+
+    if [[ "$distro" == "Debian" ]]; then
+        for release in "${supported_releases_debian[@]}"; do
+            if [[ "$current_distro_release" == "$release" ]]; then
+                found=true
+                break
+            fi
+        done
+    fi
+
+    if [[ "$found" == "true" ]]; then
+        break
+    fi
+done
+
+if [[ $current_distro != "" && "$found" == "false" ]]; then
+    echo "Current distribution is NOT in the list."
+    echo "Supported distributions and releases are:"
+    echo "Ubuntu: ${supported_releases_ubuntu[*]}"
+    echo "Debian: ${supported_releases_debian[*]}"
+    exit 1
+fi
+
+echo "Intalling python3.9 through deadsnakes PPA repository"
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install -y python3.9 python3.9-venv #python3-pip
 
